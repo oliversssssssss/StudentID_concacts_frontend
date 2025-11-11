@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Contact List Management System</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="./style.css"/>
+    <script>window.API_BASE='http://localhost:8080';</script>
+</head>
+<body>
+<header class="topbar">
+    <h1 class="title">Contact List Management System</h1>
+    <span class="subtitle">通讯录管理系统</span>
+</header>
+
+<main class="container">
+    <!-- 输入区（常驻） -->
+    <section class="card">
+        <h2 class="section-title">Input / Edit</h2>
+        <form id="form" class="form-grid" autocomplete="off">
+            <input type="hidden" id="id">
+            <div class="field">
+                <label for="name">Name</label>
+                <input id="name" placeholder="Full name" maxlength="100" required>
+            </div>
+            <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" placeholder="e.g. 188-1234-5678" maxlength="32" required>
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="Optional" maxlength="120">
+            </div>
+            <div class="field">
+                <label for="group">Group</label>
+                <input id="group" placeholder="e.g. Class A / Lab / Team" maxlength="50">
+            </div>
+            <div class="field wide">
+                <label for="note">Note</label>
+                <input id="note" placeholder="Optional (≤255)">
+            </div>
+            <div class="field">
+                <label class="checkbox">
+                    <input type="checkbox" id="blacklisted">
+                    <span>Blacklist</span>
+                </label>
+            </div>
+            <div class="form-actions">
+                <button type="reset" id="btn-reset" class="btn">Reset</button>
+                <button type="submit" id="btn-save" class="btn primary">Save</button>
+            </div>
+            <div id="form-error" class="error"></div>
+        </form>
+    </section>
+
+    <!-- 数据展示区 -->
+    <section class="card">
+        <div class="list-header">
+            <h2 class="section-title">Records</h2>
+            <div class="tools">
+                <select id="group-filter" class="select">
+                    <option value="">All Groups</option>
+                </select>
+                <select id="blacklist-filter" class="select">
+                    <option value="">All</option>
+                    <option value="false">Hide Blacklist</option>
+                    <option value="true">Only Blacklist</option>
+                </select>
+                <input id="search" class="search" placeholder="Search name / phone / email / note...">
+                <button id="btn-refresh" class="btn">Refresh</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width:66px">ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Group</th>
+                    <th>Blacklist</th>
+                    <th style="width:220px">Action</th>
+                </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+            <div id="empty" class="empty hidden">No data</div>
+        </div>
+    </section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+<script src="./app.js"></script>
+</body>
+</html>
